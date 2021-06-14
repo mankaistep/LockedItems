@@ -1,0 +1,10 @@
+name: LockedItems
+main: mk.plugin.lockeditems.main.MainLockedItems
+version: 1.0
+author: MankaiStep
+softdepend: [TradeMe]
+commands:
+    lockeditems:
+        permission: lockeditems.admin
+        description: Plugin's commands
+        aliases: [li]

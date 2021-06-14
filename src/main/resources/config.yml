@@ -1,0 +1,9 @@
+# Bypass permission: lockeditems.ignore
+unlocked-lore: '&a&oĐã được mở khóa'
+lock-fee: 10000
+blocked-commands:
+- ah
+- auction
+- auctionhouse
+- auc
+- hat
