@@ -134,6 +134,31 @@ public class LIListener implements Listener {
 			e.setCancelled(true);
 		} else {
 			InventoryType it = e.getInventory().getType();
+
+			// Ec
+			{
+				var current = e.getCurrentItem();
+				if (LIUtils.isLocked(current) && !LIUtils.isOwner(current, e.getWhoClicked().getName())) {
+					e.setCancelled(true);
+					e.getWhoClicked().sendMessage("§cBạn không sở hữu đồ này!");
+					return;
+				}
+			}
+
+
+			// New 1.14+
+			if (List.of(InventoryType.BARREL, InventoryType.SMOKER,
+					InventoryType.BLAST_FURNACE, InventoryType.GRINDSTONE,
+					InventoryType.STONECUTTER, InventoryType.SMITHING).contains(it)) {
+				if (e.getWhoClicked().hasPermission("lockeditems.admin")) return;
+				var current = e.getCurrentItem();
+				if (LIUtils.isLocked(current)) {
+					e.setCancelled(true);
+					e.getWhoClicked().sendMessage("§cĐồ khóa!");
+					return;
+				}
+			}
+
 			ItemStack cur;
 			ItemStack click;
 			if (!it.equals(InventoryType.CHEST) && !it.equals(InventoryType.HOPPER) && !it.equals(InventoryType.DROPPER)
