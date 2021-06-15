@@ -58,24 +58,25 @@ public class LIListener implements Listener {
 
 	}
 
+
 	@EventHandler
 	public void onPickup(EntityPickupItemEvent e) {
-		Bukkit.getScheduler().runTask(MainLockedItems.getMain(), () -> {
-			if (e.isCancelled()) return;
-			ItemStack i = e.getItem().getItemStack();
-			if (e.getEntityType() == EntityType.PLAYER) {
-				Player player = (Player) e.getEntity();
-				if (!player.hasPermission("lockeditems.ignore")) {
-					if (LIUtils.isLocked(i) && !LIUtils.isOwner(i, player.getName())) {
-						e.setCancelled(true);
-					} else {
-						LIUtils.removeOwner(i, player.getName());
-					}
+		if (e.isCancelled()) return;
+		ItemStack i = e.getItem().getItemStack();
+		if (e.getEntityType() == EntityType.PLAYER) {
+			Player player = (Player) e.getEntity();
+			if (player.hasPermission("lockeditems.ignore")) return;
+
+			if (LIUtils.isLocked(i)) {
+				if (!LIUtils.isOwner(i, player.getName())) {
+					e.setCancelled(true);
+					player.sendActionBar("§cCó vẻ như bạn đang cố gắng nhặt đồ khóa của người khác");
+					return;
 				}
-
+				else LIUtils.removeOwner(i, player.getName());
 			}
-		});
 
+		}
 	}
 
 	@EventHandler
