@@ -147,10 +147,11 @@ public class LIListener implements Listener {
 			}
 
 
-			// New 1.14+
+			// New 1.14+ and special inventories
 			if (List.of(InventoryType.BARREL, InventoryType.SMOKER,
 					InventoryType.BLAST_FURNACE, InventoryType.GRINDSTONE,
-					InventoryType.STONECUTTER, InventoryType.SMITHING).contains(it)) {
+					InventoryType.STONECUTTER, InventoryType.SMITHING,
+					InventoryType.DISPENSER).contains(it)) {
 				if (e.getWhoClicked().hasPermission("lockeditems.admin")) return;
 				var current = e.getCurrentItem();
 				if (LIUtils.isLocked(current)) {
