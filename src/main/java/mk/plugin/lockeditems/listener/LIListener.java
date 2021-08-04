@@ -17,6 +17,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.LlamaInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
@@ -77,6 +78,9 @@ public class LIListener implements Listener {
 			}
 
 		}
+		else {
+			if (LIUtils.isLocked(i)) e.setCancelled(true);
+		}
 	}
 
 	@EventHandler
@@ -130,6 +134,10 @@ public class LIListener implements Listener {
 
 	@EventHandler
 	public void onClick(InventoryClickEvent e) {
+		if (e.getInventory() instanceof LlamaInventory) {
+			e.setCancelled(true);
+			return;
+		}
 		ClickType clicktype = e.getClick();
 		if (clicktype.equals(ClickType.NUMBER_KEY)) {
 			e.setCancelled(true);
