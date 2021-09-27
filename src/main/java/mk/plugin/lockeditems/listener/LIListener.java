@@ -86,7 +86,7 @@ public class LIListener implements Listener {
 	@EventHandler
 	public void onItemFrame(PlayerInteractEntityEvent e) {
 		Player player = e.getPlayer();
-		ItemStack i = player.getInventory().getItemInMainHand();
+		ItemStack i = player.getInventory().getItem(e.getHand());
 		Entity et = e.getRightClicked();
 		if (LIUtils.isLocked(i) && (et instanceof ItemFrame || player.isSneaking())) {
 			LIUtils.addOwner(i, player.getName());
@@ -97,7 +97,7 @@ public class LIListener implements Listener {
 	@EventHandler
 	public void onEquipArmorStand(PlayerInteractAtEntityEvent e) {
 		Player player = e.getPlayer();
-		ItemStack i = player.getInventory().getItemInMainHand();
+		ItemStack i = player.getInventory().getItem(e.getHand());
 		Entity et = e.getRightClicked();
 		if (LIUtils.isLocked(i) && et instanceof ArmorStand) {
 			LIUtils.addOwner(i, player.getName());
